@@ -4,9 +4,6 @@ import { getWebtoonsRequest } from "./redux/actions";
 
 const App = () => {
   const dispatch = useDispatch();
-  /* 
-  주석 제거하면 오류가 뜸
-  */
   const { loading, data, error } = useSelector((state) => state);
 
   useEffect(() => {
@@ -25,12 +22,12 @@ const App = () => {
     <div>
       <h1>Webtoons</h1>
       <ul>
-        {/* {data.webtoons &&
-          data.map((webtoon) => (
-            <li key={webtoon.id}>
+        {data &&
+          data.webtoons.map((webtoon) => (
+            <li key={webtoon._id}>
               {webtoon.title} - {webtoon.author}
             </li>
-          ))} */}
+          ))}
       </ul>
     </div>
   );
