@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getWebtoonsRequest } from "./redux/actions";
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+  /* 
+  주석 제거하면 오류가 뜸
+  */
+  const { loading, data, error } = useSelector((state) => state);
+
+  useEffect(() => {
+    dispatch(getWebtoonsRequest());
+  }, [dispatch]);
+
+  if (loading === undefined) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Webtoons</h1>
+      <ul>
+        {/* {data.webtoons &&
+          data.map((webtoon) => (
+            <li key={webtoon.id}>
+              {webtoon.title} - {webtoon.author}
+            </li>
+          ))} */}
+      </ul>
     </div>
   );
-}
+};
 
 export default App;
