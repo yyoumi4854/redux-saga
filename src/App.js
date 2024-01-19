@@ -25,6 +25,9 @@ const App = () => {
         {data &&
           data.webtoons.map((webtoon) => (
             <li key={webtoon._id}>
+              <a href={webtoon.url}>
+                <img src={webtoon.img} />
+              </a>
               {webtoon.title} - {webtoon.author}
             </li>
           ))}

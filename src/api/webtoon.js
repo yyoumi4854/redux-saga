@@ -5,7 +5,25 @@ const instance = axios.create({
   headers: { "X-Custom-Header": "foobar" },
 });
 
-export const getWebtoons = async () => {
-  const result = await instance.get("/");
+/*
+page : number
+perPage : number
+service : naver | kakao | kakaoPage
+updateDay : mon | tue | wed | thu | fri | sat | sun | finished | naverDaily
+ */
+export const getWebtoons = async (
+  page = 1,
+  perPage = 10,
+  service = "naver",
+  updateDay
+) => {
+  const result = await instance.get("/", {
+    params: {
+      page,
+      perPage,
+      service,
+      updateDay,
+    },
+  });
   return result;
 };
