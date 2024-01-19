@@ -5,9 +5,10 @@ import axios from "axios";
 import * as webtoonAPI from "../api/webtoon";
 
 // API 호출을 담당하는 worker saga
-function* getWebtoonsSaga() {
+function* getWebtoonsSaga(action) {
   try {
-    const response = yield call(webtoonAPI.getWebtoons);
+    const { page, perPage, service, updateDay } = action.payload;
+    const response = yield call(webtoonAPI.getWebtoons, page, perPage, service, updateDay);
     yield put(actions.getWebtoonsSuccess(response.data));
   } catch (error) {
     yield put(actions.getWebtoonsFailure(error.message));

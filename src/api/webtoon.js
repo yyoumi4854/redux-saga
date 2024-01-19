@@ -6,17 +6,17 @@ const instance = axios.create({
 });
 
 /*
-page : number
-perPage : number
-service : naver | kakao | kakaoPage
-updateDay : mon | tue | wed | thu | fri | sat | sun | finished | naverDaily
+Parameters:
+- options: {
+    page: number,
+    perPage: number,
+    service: "naver" | "kakao" | "kakaoPage",
+    updateDay: "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun" | "finished" | "naverDaily"
+  }
  */
-export const getWebtoons = async (
-  page = 1,
-  perPage = 10,
-  service = "naver",
-  updateDay
-) => {
+export const getWebtoons = async (options = {}) => {
+  const { page = 1, perPage = 10, service = "naver", updateDay = "mon" } = options;
+
   const result = await instance.get("/", {
     params: {
       page,
@@ -25,5 +25,6 @@ export const getWebtoons = async (
       updateDay,
     },
   });
+
   return result;
 };
